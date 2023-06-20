@@ -1,10 +1,17 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Spectrum Awareness in 5G Communication Systems",
+    "section": "",
+    "text": "Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions."
+  },
+  {
     "objectID": "index.html#technologies",
     "href": "index.html#technologies",
     "title": "Spectrum Awareness in 5G Communication Systems",
     "section": "Technologies",
-    "text": "Technologies"
+    "text": "Technologies\nFPGA Board: Zynq UltraScale+ MPSoC ZCU102\nSoftware Defined Radios: Ettus USRP N210\nGNU Radio\nPython, Tensorflow"
   },
   {
     "objectID": "index.html#collaborators-contact-info",
@@ -12,5 +19,26 @@
     "title": "Spectrum Awareness in 5G Communication Systems",
     "section": "Collaborators + Contact Info",
     "text": "Collaborators + Contact Info"
+  },
+  {
+    "objectID": "Resources.html",
+    "href": "Resources.html",
+    "title": "Useful Resources",
+    "section": "",
+    "text": "ZCU102 Evaluation Board\nZCU102 QuickStart Guide\nDevelopement Flow for UltraScale+ MPSoC"
+  },
+  {
+    "objectID": "Resources.html#vitis",
+    "href": "Resources.html#vitis",
+    "title": "Useful Resources",
+    "section": "Vitis",
+    "text": "Vitis\nVitis Documentation Tutorials\nVitis AI Tutorials + Examples\nUsing Vitis With RNNs"
+  },
+  {
+    "objectID": "Resources.html#vivado",
+    "href": "Resources.html#vivado",
+    "title": "Useful Resources",
+    "section": "Vivado",
+    "text": "Vivado"
   }
 ]
