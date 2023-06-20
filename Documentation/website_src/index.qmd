@@ -5,8 +5,17 @@ format:
    toc: true
 ---
 ## Project Description
+Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions. 
+
 
 ## Technologies
+FPGA Board: Zynq UltraScale+ MPSoC ZCU102
+
+Software Defined Radios: Ettus USRP N210
+
+GNU Radio
+
+Python, Tensorflow
 
 ## Collaborators + Contact Info
 

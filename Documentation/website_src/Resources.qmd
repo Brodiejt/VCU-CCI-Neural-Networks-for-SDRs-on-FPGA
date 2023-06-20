@@ -1,0 +1,25 @@
+---
+title: "Useful Resources"
+format: 
+  html: 
+   toc: true
+---
+
+## FPGA Board Specs and Info
+[ZCU102 Evaluation Board](https://docs.xilinx.com/v/u/en-US/ug1182-zcu102-eval-bd)
+
+[ZCU102 QuickStart Guide](https://www.xilinx.com/support/documents/boards_and_kits/zcu102/xtp426-zcu102-quickstart.pdf)
+
+[Developement Flow for UltraScale+ MPSoC](https://docs.xilinx.com/r/2021.1-English/ug1137-zynq-ultrascale-mpsoc-swdev/Software-Development-Flow)
+
+
+## Vitis
+[Vitis Documentation Tutorials](https://docs.xilinx.com/r/en-US/Vitis-Tutorials-Vitis-Platform-Creation/Design-Tutorials?tocId=AVB~cR5Cu_AV0_YG0mjRrw)
+
+[Vitis AI Tutorials + Examples](https://github.com/Xilinx/Vitis-AI-Tutorials)
+
+[Using Vitis With RNNs](https://docs.xilinx.com/r/en-US/ug1563-vitis-ai-rnn/Overview)
+
+
+
+## Vivado
