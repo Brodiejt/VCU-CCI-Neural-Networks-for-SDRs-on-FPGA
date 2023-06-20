@@ -18,6 +18,8 @@ format:
 
 [Vitis AI Tutorials + Examples](https://xilinx.github.io/Vitis-AI/)
 
+[Vitis AI Model Preparation Tutorial](https://github.com/Xilinx/Vitis-AI/blob/v3.0/src/vai_quantizer/vai_q_tensorflow2.x/README.md#inspecting-vai_q_tensorflow2)
+
 [Using Vitis With RNNs](https://docs.xilinx.com/r/en-US/ug1563-vitis-ai-rnn/Overview)
 
 
