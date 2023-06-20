@@ -16,7 +16,7 @@ format:
 ## Vitis
 [Vitis Documentation Tutorials](https://docs.xilinx.com/r/en-US/Vitis-Tutorials-Vitis-Platform-Creation/Design-Tutorials?tocId=AVB~cR5Cu_AV0_YG0mjRrw)
 
-[Vitis AI Tutorials + Examples](https://github.com/Xilinx/Vitis-AI-Tutorials)
+[Vitis AI Tutorials + Examples](https://xilinx.github.io/Vitis-AI/)
 
 [Using Vitis With RNNs](https://docs.xilinx.com/r/en-US/ug1563-vitis-ai-rnn/Overview)
 
