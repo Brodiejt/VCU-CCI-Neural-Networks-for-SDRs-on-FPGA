@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Tutorials"
+        file: Tutorials.qmd
+      - text: "Research"
+        file: Research.qmd
+      - text: "Resources"
+        file: Resources.qmd
