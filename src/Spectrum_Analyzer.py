@@ -32,13 +32,15 @@ def unpack_bytes_to_complex(bytes):
      data = struct.unpack('<2048f', bytes)
      return [complex(data[i], data[i+1])for i in range(0, len(data), 2)]
 
+
 def get_spectrum_data(window):
     ft, Pxx_den = signal.periodogram(window, SAMPLE_RATE, 'flattop', scaling='spectrum') # run fft and calculate Power spectral density
     Pxx_den_dB = np.fft.fftshift(10.0*np.log10(Pxx_den))
     ft = np.fft.fftshift(ft)
-    alpha , bitmap = normalize_fft_windows(Pxx_den_dB)
-    return alpha, bitmap, ft, Pxx_den_dB
-     
+    noise_curve , bitmap = normalize_fft_windows(Pxx_den_dB)
+    return noise_curve, bitmap, ft, Pxx_den_dB
+
+#Polynomial for noise approximation
 def func(x, a, b, c, d, e):
     return a*x**4 + b*x**3 + c*x**2 + d*x + e
 
@@ -63,7 +65,6 @@ def normalize_fft_windows(window):
 
 #read and process samples from a local binary file in the IQ_Samples directory. Plots the FFT of 1024 complex samples and approximates
 # a function for noise. When the signal strength of a given frequency is higher than the threshold mark that frequency as a 1 in the bitmap array
-# Returns the coefficients of the aproximated function (alpha), and the bitmap for each frequncy in the fft window (bitmap)
 def readSamplesFromFile(filePath):
     with open(filePath, 'rb') as file:
         print('opening file')
@@ -116,8 +117,6 @@ def readSamplesFromFile(filePath):
     # Unpack 2 floats for each complex number
     ## complex(data[i], data[i+1])
     return 1
-
-#Polynomial for noise approximation
 
 
 
