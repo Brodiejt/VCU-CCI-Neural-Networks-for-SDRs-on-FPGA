@@ -9,7 +9,7 @@ import time
 import scipy.signal as signal
 import scipy.optimize as opt
 
-samples_file = 'IQ_Samples/Samples(Splotches)'
+samples_file = 'IQ_Samples\Samples(Splotches)'
 
 SAMPLE_RATE = 5.88e6
 CENTER_FREQUENCY = 0
@@ -17,13 +17,6 @@ CENTER_FREQUENCY = 0
 PREDICTION_TIMESTEPS = 5
 
 fft_window_samples = []
-
-
-def getFFT_PSD(samples, num_samples, sample_rate):
-    PSD = np.abs(np.fft.fft(samples))**2 / (num_samples*sample_rate)
-    PSD_log = 10.0*np.log10(PSD)
-    PSD_shifted = np.fft.fftshift(PSD_log)
-    return PSD_shifted
 
 
 def prepSamples(samples, window_size):
@@ -44,6 +37,8 @@ def readSamplesFromFile(filePath):
         xdata, ydata = [], []
         ln, = ax.plot([], [], 'ro-')
         ln2, = ax.plot([], [], 'blue')
+        ln3, = ax.plot([], [], 'green')
+        ln4, = ax.plot([], [], 'blue')
 
         plt.ylabel('Power (dB)')
         plt.xlabel('Frequency (Hz)')
@@ -60,8 +55,10 @@ def readSamplesFromFile(filePath):
 
             print(len(fft_window_samples[index]))
 
-            ft, Pxx_den = signal.periodogram(fft_window_samples[index], SAMPLE_RATE, 'flattop', scaling='spectrum')
-            Pxx_den_dB = 10.0*np.log10(Pxx_den)
+            ft, Pxx_den = signal.periodogram(
+                fft_window_samples[index], SAMPLE_RATE, 'flattop', scaling='spectrum')
+            Pxx_den_dB = np.fft.fftshift(10.0*np.log10(Pxx_den))
+            ft = np.fft.fftshift(ft)
             alpha = normalize_fft_windows(Pxx_den_dB)
             ln.set_xdata(ft)
             ln.set_ydata(Pxx_den_dB)
@@ -71,9 +68,17 @@ def readSamplesFromFile(filePath):
             x = np.linspace(0, 1, 1024)
 
             for i in range(x.size):
-                x[i] = func(x[i], alpha[0], alpha[1], alpha[2], alpha[3], alpha[4])
-            
+                x[i] = func(x[i], alpha[0], alpha[1],
+                            alpha[2], alpha[3], alpha[4])
+
             ln2.set_ydata(x)
+
+            ln3.set_xdata(ft)
+            ln3.set_ydata(x+6)
+
+            ln4.set_xdata(ft)
+            ln4.set_ydata(x-6)
+
             ax.relim()
             ax.autoscale_view()
 
@@ -81,25 +86,28 @@ def readSamplesFromFile(filePath):
             time.sleep(10)
             fig.canvas.flush_events()
 
-            
-
             index += 1
 
     # Unpack 2 floats for each complex number
     ## complex(data[i], data[i+1])
     return 1
+
+
 def func(x, a, b, c, d, e):
     return a*x**4 + b*x**3 + c*x**2 + d*x + e
+
 
 def normalize_fft_windows(window):
     q3, q1 = np.percentile(window, [75, 25])
     noise_iqr = q3-q1
     median = np.median(window)
     noise_ceiling = median+noise_iqr
-    print(f'-----\nNoise IQR: {noise_iqr} \nmedian: {median}\nNoise Ceiling: {noise_ceiling}\n ')
+    print(
+        f'-----\nNoise IQR: {noise_iqr} \nmedian: {median}\nNoise Ceiling: {noise_ceiling}\n ')
 
-    array = opt.curve_fit(func, xdata = np.linspace(0, 1, 1024), ydata = window)[0]
+    array = opt.curve_fit(func, xdata=np.linspace(0, 1, 1024), ydata=window)[0]
     print(array)
     return array
+
 
 readSamplesFromFile(samples_file)
