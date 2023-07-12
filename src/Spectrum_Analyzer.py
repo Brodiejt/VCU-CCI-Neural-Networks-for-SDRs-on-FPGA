@@ -10,13 +10,8 @@ import scipy.signal as signal
 import scipy.optimize as opt
 
 samples_file = 'IQ_Samples/Samples(Splotches)'
-
 SAMPLE_RATE = 5.88e6 
-
-PREDICTION_TIMESTEPS = 5
-
 fft_window_samples = []
-
 bitmap_windows = []
 
 #prep samples for model
@@ -65,7 +60,7 @@ def normalize_fft_windows(window):
 
 #read and process samples from a local binary file in the IQ_Samples directory. Plots the FFT of 1024 complex samples and approximates
 # a function for noise. When the signal strength of a given frequency is higher than the threshold mark that frequency as a 1 in the bitmap array
-def readSamplesFromFile(filePath):
+def VisualizeSamplesFromFile(filePath):
     with open(filePath, 'rb') as file:
         print('opening file')
 
@@ -121,4 +116,4 @@ def readSamplesFromFile(filePath):
 
 
 
-readSamplesFromFile(samples_file)
+VisualizeSamplesFromFile(samples_file)
