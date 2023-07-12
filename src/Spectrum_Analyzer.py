@@ -8,6 +8,7 @@ import io
 import time
 import scipy.signal as signal
 import scipy.optimize as opt
+import matlab.engine
 
 samples_file = 'IQ_Samples/Samples(Splotches)'
 SAMPLE_RATE = 5.88e6 
@@ -30,7 +31,7 @@ def unpack_bytes_to_complex(bytes):
 
 def get_spectrum_data(window):
     ft, Pxx_den = signal.periodogram(window, SAMPLE_RATE, 'flattop', scaling='spectrum') # run fft and calculate Power spectral density
-    Pxx_den_dB = np.fft.fftshift(10.0*np.log10(Pxx_den))
+    Pxx_den_dB = np.fft.fftshift(10.0*np.log10(Pxx_den)) #convert fft to dB and shift
     ft = np.fft.fftshift(ft)
     noise_curve , bitmap = normalize_fft_windows(Pxx_den_dB)
     return noise_curve, bitmap, ft, Pxx_den_dB
@@ -57,6 +58,20 @@ def normalize_fft_windows(window):
     bitmap = list(map(apply_threshold, window, x))
     
     return x, bitmap
+
+def get_bitmaps_from_file(filepath):
+    index = 0
+    bitmap_windows = []
+    with open(filepath, 'rb') as file:
+        while file.peek(8192):
+            bytes = file.read(8192)
+            fft_window_samples.append(unpack_bytes_to_complex(bytes))
+            print(len(fft_window_samples[index]))
+
+            fitted_curve, bitmap, ft, Pxx_den_dB  = get_spectrum_data(fft_window_samples[index])
+            bitmap_windows.append(bitmap)
+            index += 1
+    return bitmap_windows
 
 #read and process samples from a local binary file in the IQ_Samples directory. Plots the FFT of 1024 complex samples and approximates
 # a function for noise. When the signal strength of a given frequency is higher than the threshold mark that frequency as a 1 in the bitmap array
@@ -102,7 +117,6 @@ def VisualizeSamplesFromFile(filePath):
             ax.autoscale_view()
 
             fig.canvas.draw()
-            time.sleep(2)
             fig.canvas.flush_events()
 
             bitmap_windows.append(bitmap)
@@ -114,6 +128,9 @@ def VisualizeSamplesFromFile(filePath):
     return 1
 
 
-
-
 VisualizeSamplesFromFile(samples_file)
+# eng = matlab.engine.start_matlab()
+# training_data = get_bitmaps_from_file(samples_file)
+# eng.workspace['bitmaps'] = training_data
+# eng.save('spectrum_bitmap_data.mat','bitmaps',nargout=0)
+# eng.exit()

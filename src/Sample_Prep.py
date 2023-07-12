@@ -1,5 +1,5 @@
 import matlab.engine
-import Spectrum_Analyzer as SA
+
 
 # Juan Terri jordan Cadence, Emily, Tullia, Alejandor, Eddie 
 # Sam Erin Gabriel Mariana Shantai + maybe 2
@@ -40,6 +40,8 @@ if architecture == 'matlab':
         training_data = get_bitmaps_from_file(samples_file)
         eng.workspace['bitmaps'] = training_data
         eng.save('spectrum_bitmap_data.mat','bitmaps')
+        eng.exit()
+        
 
 
 
