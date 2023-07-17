@@ -9,9 +9,10 @@ import time
 import scipy.signal as signal
 import scipy.optimize as opt
 import matlab.engine
+import socket
 
-samples_file = 'IQ_Samples/Samples(Splotches)'
-SAMPLE_RATE = 5.88e6 
+samples_file = 'src/Binary_IQ_Samples/Samples(Splotches)'
+SAMPLE_RATE = 4.88e6 
 fft_window_samples = []
 bitmap_windows = []
 
@@ -30,7 +31,7 @@ def unpack_bytes_to_complex(bytes):
 
 
 def get_spectrum_data(window):
-    ft, Pxx_den = signal.periodogram(window, SAMPLE_RATE, 'flattop', scaling='spectrum') # run fft and calculate Power spectral density
+    ft, Pxx_den = signal.periodogram( window, SAMPLE_RATE, 'hamming', scaling='spectrum') # run fft and calculate Power spectral density
     Pxx_den_dB = np.fft.fftshift(10.0*np.log10(Pxx_den)) #convert fft to dB and shift
     ft = np.fft.fftshift(ft)
     noise_curve , bitmap = normalize_fft_windows(Pxx_den_dB)
@@ -114,9 +115,9 @@ def VisualizeSamplesFromFile(filePath):
             ln3.set_ydata(bitmap)
 
             ax.relim()
-            ax.autoscale_view()
 
             fig.canvas.draw()
+            time.sleep(1)
             fig.canvas.flush_events()
 
             bitmap_windows.append(bitmap)
@@ -127,8 +128,61 @@ def VisualizeSamplesFromFile(filePath):
     ## complex(data[i], data[i+1])
     return 1
 
+def VisualizeSamplesFromServer(host, port):
+     #Set up matplot lib plot
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+          s.connect((host, port))
+          s.setblocking(True)
 
-VisualizeSamplesFromFile(samples_file)
+          f = np.arange(SAMPLE_RATE/-2.0, SAMPLE_RATE/2.0, SAMPLE_RATE/1024) #create array for x axis
+          plt.ion()
+          fig, ax = plt.subplots()
+          xdata, ydata = [], []
+          ln, = ax.plot([], [], 'ro-')
+          ln2, = ax.plot([], [], 'blue')
+          ln3, = ax.plot([], [], 'green')
+          ln4, = ax.plot([], [], 'blue')
+          plt.ylabel('Power (dB)')
+          plt.xlabel('Frequency (Hz)')
+          print(f'Connecting server IP:{host}, Port:{port}')
+          
+          bytes = []
+          currTime = time.time()
+          while 1:
+               data = s.recv(8192)
+               if(time.time() - currTime > 0.1):
+                  bytes = data
+                  currTime = time.time()
+               else:
+                    continue
+               
+               if(len(bytes) < 8192):
+                    continue
+               
+
+            #    print(len(bytes))
+               window = unpack_bytes_to_complex(bytes)
+               fitted_curve, bitmap, ft, Pxx_den_dB  = get_spectrum_data(window)
+
+
+               ln.set_xdata(ft)
+               ln.set_ydata(Pxx_den_dB)
+   
+               ln2.set_xdata(ft)
+   
+               ln2.set_ydata(fitted_curve)
+   
+               ln3.set_xdata(ft)
+               ln3.set_ydata(bitmap)
+   
+               ax.relim()
+               #ax.autoscale_view()
+   
+               fig.canvas.draw()
+               fig.canvas.flush_events()
+
+VisualizeSamplesFromServer('127.0.0.1', 2000)
+
 # eng = matlab.engine.start_matlab()
 # training_data = get_bitmaps_from_file(samples_file)
 # eng.workspace['bitmaps'] = training_data

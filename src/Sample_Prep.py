@@ -1,8 +1,5 @@
 import matlab.engine
-
-
-# Juan Terri jordan Cadence, Emily, Tullia, Alejandor, Eddie 
-# Sam Erin Gabriel Mariana Shantai + maybe 2
+import Spectrum_Analyzer as SA
 
 mode = 0 #1 = Server, 0 = File
 architecture = 'matlab' #matlab or tensorflow
