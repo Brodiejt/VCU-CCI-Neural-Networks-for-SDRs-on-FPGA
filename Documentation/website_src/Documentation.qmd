@@ -33,9 +33,7 @@ If the installer gets stuck on getting something yadayada you may need to instal
 
 ## Cable Drivers
 
-This step shouldn't be necessary as the cable drivers come with installation of Vitis. 
-
-In the event that they did not, they can be downloaded here.
+This step shouldn't be necessary as the cable drivers come with installation of Vitis. In the event that they did not, they can be downloaded here.
 
 You should find the `install_drivers` script located here: `<PathToXilinxRootFolder>/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers`
 
@@ -96,23 +94,29 @@ Make sure the micro USB cable is plugged into the UART port (J83?) on the board 
 
 The board should show up as `ttyUSB0`. You can check this by running `cat /dev/ | grep ttyUSB`. You should see `ttyUSB0` listed.
 
-You should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.
+You should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use `8N1` (default parity settings) and a baudrate of `115200`.
 
 <!--- ![PuTTy Connection Settings](res/putty1.png) --->
 
-![PuTTy Connection Settings](res/putty2.png)
+![PuTTy Settings](res/putty2.png)
 
 If you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.
 
 
 ### SSH
 
-VCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.
+To use ssh the board must have an IP Address. It can get it one of two ways:
 
-Alternatively, a static IP can be given to the board by running `ifconfig eth0 <IPAdress>` on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.
+ - VCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.
+
+ - Alternatively, a static IP can be given to the board by running `ifconfig eth0 <IPAddress>` on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.
 
 On the FPGA, run `ifconfig` to find the IP address of the board (eth0).
 
 Now you can connect to the board by running `ssh -X root@<IPAddress>` on the host machine.
 
-Note: `-X` enables X11 Forwarding, which is not necessary.
+:::{.callout-note}
+`-X` enables X11 Forwarding, which is not necessary.
+:::
+
+If ssh fails, make sure that both devices can reach eachother using `ping`. Also make sure that both the board and the host machine can successfully `ping` the default gateway.

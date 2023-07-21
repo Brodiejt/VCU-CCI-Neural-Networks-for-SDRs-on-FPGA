@@ -172,8 +172,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="cable-drivers" class="level2">
 <h2 class="anchored" data-anchor-id="cable-drivers">Cable Drivers</h2>
-<p>This step shouldn’t be necessary as the cable drivers come with installation of Vitis.</p>
-<p>In the event that they did not, they can be downloaded here.</p>
+<p>This step shouldn’t be necessary as the cable drivers come with installation of Vitis. In the event that they did not, they can be downloaded here.</p>
 <p>You should find the <code>install_drivers</code> script located here: <code>&lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers</code></p>
 <p>Running the <code>install_drivers</code> script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges.</p>
 </section>
@@ -220,23 +219,39 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="serial">Serial</h3>
 <p>Make sure the micro USB cable is plugged into the UART port (J83?) on the board and the host machine. Turn on the board.</p>
 <p>The board should show up as <code>ttyUSB0</code>. You can check this by running <code>cat /dev/ | grep ttyUSB</code>. You should see <code>ttyUSB0</code> listed.</p>
-<p>You should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.</p>
+<p>You should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use <code>8N1</code> (default parity settings) and a baudrate of <code>115200</code>.</p>
 <!--- ![PuTTy Connection Settings](res/putty1.png) --->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="res/putty2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">PuTTy Connection Settings</figcaption>
+<figcaption class="figure-caption">PuTTy Settings</figcaption>
 </figure>
 </div>
 <p>If you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.</p>
 </section>
 <section id="ssh" class="level3">
 <h3 class="anchored" data-anchor-id="ssh">SSH</h3>
-<p>VCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.</p>
-<p>Alternatively, a static IP can be given to the board by running <code>ifconfig eth0 &lt;IPAdress&gt;</code> on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.</p>
+<p>To use ssh the board must have an IP Address. It can get it one of two ways:</p>
+<ul>
+<li><p>VCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.</p></li>
+<li><p>Alternatively, a static IP can be given to the board by running <code>ifconfig eth0 &lt;IPAddress&gt;</code> on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.</p></li>
+</ul>
 <p>On the FPGA, run <code>ifconfig</code> to find the IP address of the board (eth0).</p>
 <p>Now you can connect to the board by running <code>ssh -X root@&lt;IPAddress&gt;</code> on the host machine.</p>
-<p>Note: <code>-X</code> enables X11 Forwarding, which is not necessary.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>-X</code> enables X11 Forwarding, which is not necessary.</p>
+</div>
+</div>
+<p>If ssh fails, make sure that both devices can reach eachother using <code>ping</code>. Also make sure that both the board and the host machine can successfully <code>ping</code> the default gateway.</p>
 
 
 </section>
