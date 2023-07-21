@@ -167,8 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#workflow" id="toc-workflow" class="nav-link active" data-scroll-target="#workflow">Workflow</a></li>
-  <li><a href="#preparing-the-model" id="toc-preparing-the-model" class="nav-link" data-scroll-target="#preparing-the-model">Preparing the Model</a>
+  <li><a href="#preparing-the-model" id="toc-preparing-the-model" class="nav-link active" data-scroll-target="#preparing-the-model">Preparing the Model</a>
   <ul class="collapse">
   <li><a href="#inspection" id="toc-inspection" class="nav-link" data-scroll-target="#inspection">Inspection</a></li>
   <li><a href="#quantization" id="toc-quantization" class="nav-link" data-scroll-target="#quantization">Quantization</a></li>
@@ -198,10 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="workflow" class="level1">
-<h1>Workflow</h1>
 <p><img src="res/vitis_ai_workflow.png" class="img-fluid" alt="Vitis AI Developer Workflow"> Here is the devlopement workflow for creating and deploying neural networks onto the fpga board. In this section we only have to focus on steps 1 and 3 because the hardware and DPU are already installed onto the boot image stored on the SD card. Once you have your trained model you can then inspect, quantize, and compile the model for the FPGA board. Once the model is prepared, you will use the Vitis AI runtime environment (VART) API calls in your code to run the model on the board.</p>
-</section>
 <section id="preparing-the-model" class="level1">
 <h1>Preparing the Model</h1>
 <section id="inspection" class="level2">
