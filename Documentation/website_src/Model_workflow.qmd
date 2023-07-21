@@ -5,7 +5,6 @@ format:
    toc: true
 execute:
   enabled: false
-  echo: false
   eval: false
 ---
 
@@ -26,7 +25,7 @@ from pytorch_nndct.apis import Inspector
 ```
 
 
-Specify the target name of DPU, for the our FPGA board it is: 
+Specify the target name of DPU, for our FPGA board it is: 
 
 ``` {python}
 target = ""
@@ -49,12 +48,10 @@ inspector.inspect(model, (dummy_input,), 'cpu',
 The Vitis AI Quantizer, integrated as a component of either TensorFlow or PyTorch, performs a calibration step in which a subset of the original training data (typically 100-1000 samples, no labels required) is forward propagated through the network to analyze the distribution of the activations at each layer. The weights and activations are then quantized as 8-bit integer values.
 
 First import torch and the quantizer class
-```{python}
-
-```
+```from pytorch_nndct.apis import torch_quantizer```
 
 
-Then set up the paramters for the ``` torch_quantizer()function ``` and create a quantizer object
+Then set up the paramters for the ``` torch_quantizer()  function ``` and create a quantizer object
 
 ```{python}
 mode = 'float'
