@@ -1,11 +1,9 @@
 ---
-title: "Setup"
+title: "Setup and Installation"
 format: 
   html: 
    toc: true
 ---
-
-## Overview and Architecture
 
 # Software Installation
 
@@ -54,9 +52,13 @@ Now add the current directory to your path with `export PATH=$PATH:$(pwd)`.
 First, clone the [Vitis-AI repository](https://github.com/Xilinx/Vitis-AI) using `git clone https://github.com/Xilinx/Vitis-AI`
 
 Next, download the prebuilt cpu docker image with the command `docker pull xilinx/vitis-ai-cpu:latest`
-cd to the "setup/docker" directory and run
- `./docker_build_cpu.sh` to build the docker container
+
+`cd` to the "setup/docker" directory and run
+
+`./docker_build_cpu.sh` to build the docker container
+
 Finally you should be able to run the docker image:  (May need to update run script)
+
 `./docker_run.sh xilinx/vitis-aicpu:latest`
 
 

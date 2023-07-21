@@ -10,6 +10,8 @@ execute:
 
 
 # Workflow
+![Vitis AI Developer Workflow](res/vitis_ai_workflow.png)
+Here is the devlopement workflow for creating and deploying neural networks onto the fpga board. In this section we only have to focus on steps 1 and 3 because the hardware and DPU are already installed onto the boot image stored on the SD card. Once you have your trained model you can then inspect, quantize, and compile the model for the FPGA board. Once the model is prepared, you will use the Vitis AI runtime environment (VART) API calls in your code to run the model on the board.
 
 # Preparing the Model
 

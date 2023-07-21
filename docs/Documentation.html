@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setup</title>
+<title>Setup and Installation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,8 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-and-architecture" id="toc-overview-and-architecture" class="nav-link active" data-scroll-target="#overview-and-architecture">Overview and Architecture</a></li>
-  <li><a href="#software-installation" id="toc-software-installation" class="nav-link" data-scroll-target="#software-installation">Software Installation</a>
+  <li><a href="#software-installation" id="toc-software-installation" class="nav-link active" data-scroll-target="#software-installation">Software Installation</a>
   <ul class="collapse">
   <li><a href="#vitis-vivado" id="toc-vitis-vivado" class="nav-link" data-scroll-target="#vitis-vivado">Vitis &amp; Vivado</a></li>
   <li><a href="#cable-drivers" id="toc-cable-drivers" class="nav-link" data-scroll-target="#cable-drivers">Cable Drivers</a></li>
@@ -130,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup</h1>
+<h1 class="title">Setup and Installation</h1>
 </div>
 
 
@@ -145,9 +144,6 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview-and-architecture" class="level2">
-<h2 class="anchored" data-anchor-id="overview-and-architecture">Overview and Architecture</h2>
-</section>
 <section id="software-installation" class="level1">
 <h1>Software Installation</h1>
 <section id="vitis-vivado" class="level2">
@@ -178,7 +174,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="vitis-ai" class="level2">
 <h2 class="anchored" data-anchor-id="vitis-ai">Vitis-AI</h2>
 <p>First, clone the <a href="https://github.com/Xilinx/Vitis-AI">Vitis-AI repository</a> using <code>git clone https://github.com/Xilinx/Vitis-AI</code></p>
-<p>Next, download the prebuilt cpu docker image with the command <code>docker pull xilinx/vitis-ai-cpu:latest</code> cd to the “setup/docker” directory and run <code>./docker_build_cpu.sh</code> to build the docker container Finally you should be able to run the docker image: (May need to update run script) <code>./docker_run.sh xilinx/vitis-aicpu:latest</code></p>
+<p>Next, download the prebuilt cpu docker image with the command <code>docker pull xilinx/vitis-ai-cpu:latest</code></p>
+<p><code>cd</code> to the “setup/docker” directory and run</p>
+<p><code>./docker_build_cpu.sh</code> to build the docker container</p>
+<p>Finally you should be able to run the docker image: (May need to update run script)</p>
+<p><code>./docker_run.sh xilinx/vitis-aicpu:latest</code></p>
 </section>
 </section>
 <section id="board-setup" class="level1">
