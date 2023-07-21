@@ -40,5 +40,82 @@
     "title": "Useful Resources",
     "section": "Vivado",
     "text": "Vivado"
+  },
+  {
+    "objectID": "Documentation.html#vitis-vivado",
+    "href": "Documentation.html#vitis-vivado",
+    "title": "Documentation",
+    "section": "Vitis & Vivado",
+    "text": "Vitis & Vivado\nYou can find the Linux Self Extracting Web Installer AMD Unified Installer  here. Vivado comes with Vitis by default so there is no need to download them seperately.\nYou will need root privileges to install the Vitis software.\nIn order to download the installer you must first sign in and fill out the Download Center info.\nNavigate to where you downloaded the web installer and give it executable permissions chmod 777 Xilinx_Unified_2023.1_0507_1903_Lin64.bin\nRun the installer.\nClick Next and then select Vitis.\nThe Vitis suite can take up a lot of disk space. Luckily, for our purposes we only need a few of the options offered. Under Design Tools, all that is truly needed is Vitis, Vivado, and Vitis HLS. Under Devices the only one we need is Zynq UltraScale+ MPSoC in the SoCs section. After this agree to all.\nYou can keep the install location the same, although many tutorials have the install location as /opt/Xilinx instead of /tools/Xilinx.\nClick Next and Install.\nIf the installer gets stuck on getting something yadayada you may need to install ncurses and restart installer."
+  },
+  {
+    "objectID": "Documentation.html#install-cable-drivers",
+    "href": "Documentation.html#install-cable-drivers",
+    "title": "Documentation",
+    "section": "install cable drivers",
+    "text": "install cable drivers\nThis step shouldn’t be necessary as the cable drivers come with installation of Vitis.\nIn the event that they did not, they can be downloaded here.\nYou should find the install_drivers script located here: &lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers\nRunning the install_drivers script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges."
+  },
+  {
+    "objectID": "Documentation.html#rootless-docker",
+    "href": "Documentation.html#rootless-docker",
+    "title": "Documentation",
+    "section": "Rootless Docker",
+    "text": "Rootless Docker\nCreate a folder, for example bin, in your home directory to house Rootless Docker.\ncd into the folder and run the following command curl -fsSL https://get.docker.com/rootless | sh\nNow add the current directory to your path with export PATH=$PATH:$(pwd)."
+  },
+  {
+    "objectID": "Documentation.html#vitis-ai",
+    "href": "Documentation.html#vitis-ai",
+    "title": "Documentation",
+    "section": "Vitis-AI",
+    "text": "Vitis-AI\nFirst, clone the Vitis-AI repository using git clone https://github.com/Xilinx/Vitis-AI\n\ninstall vitis ai pytorch docker container Download prebuilt cpu docker image docker pull xilinx/vitis-ai-cpu:latest Build cpu docker image cd setup/docker ./docker_build_cpu.sh Run docker image: (May need to update run script) ./docker_run.sh xilinx/vitis-aicpu:latest"
+  },
+  {
+    "objectID": "Documentation.html#setup-zcu102-board-make-own-chapter",
+    "href": "Documentation.html#setup-zcu102-board-make-own-chapter",
+    "title": "Documentation",
+    "section": "setup zcu102 board (make own chapter)",
+    "text": "setup zcu102 board (make own chapter)\nHave the desired bootmode selected (SW6) before turning on the board. Make sure if interacting with the board via JTAG to have the JTAG USB\n\n\n\njtag boot mode\n\n\n\n\n\nsd boot mode"
+  },
+  {
+    "objectID": "Documentation.html#petalinux-sd-card-for-zcu102",
+    "href": "Documentation.html#petalinux-sd-card-for-zcu102",
+    "title": "Documentation",
+    "section": "Petalinux SD card for zcu102",
+    "text": "Petalinux SD card for zcu102\n\n(Optional) setup sd boot image Download prebuilt image from Xilinx and burn image on to SD card insert sd card into FPGA board and set to SD boot mode"
+  },
+  {
+    "objectID": "Documentation.html#cable-drivers",
+    "href": "Documentation.html#cable-drivers",
+    "title": "Documentation",
+    "section": "Cable Drivers",
+    "text": "Cable Drivers\nThis step shouldn’t be necessary as the cable drivers come with installation of Vitis.\nIn the event that they did not, they can be downloaded here.\nYou should find the install_drivers script located here: &lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers\nRunning the install_drivers script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges."
+  },
+  {
+    "objectID": "Documentation.html#zcu102-boot",
+    "href": "Documentation.html#zcu102-boot",
+    "title": "Documentation",
+    "section": "ZCU102 Boot",
+    "text": "ZCU102 Boot\nHave the desired bootmode selected (SW6) before turning on the board.\n\n\n\nJTAG Boot Mode\n\n\n\n\n\nSD Boot Mode"
+  },
+  {
+    "objectID": "Documentation.html#connecting-to-the-board",
+    "href": "Documentation.html#connecting-to-the-board",
+    "title": "Documentation",
+    "section": "Connecting to the Board",
+    "text": "Connecting to the Board\nWe can talk with the board in many ways, two of which are via serial and ethernet connections. Interacting with the Petalinux image aboard the ZCU102 can only be done when booted into SD mode.\n\nSerial\nMake sure the micro USB cable is plugged into the UART port (J83?) on the board and the host machine. Turn on the board.\nThe board should show up as ttyUSB0. You can check this by running cat /dev/ | grep ttyUSB. You should see ttyUSB0 listed.\nYou should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.\n\n\n\n\nPuTTy Connection Settings\n\n\nIf you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.\n\n\nSSH\nVCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.\nAlternatively, a static IP can be given to the board by running ifconfig eth0 &lt;IPAdress&gt; on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.\nOn the FPGA, run ifconfig to find the IP address of the board (eth0).\nNow you can connect to the board by running ssh -X root@&lt;IPAddress&gt; on the host machine.\nNote: -X enables X11 Forwarding, which is not necessary."
+  },
+  {
+    "objectID": "Documentation.html#zcu102-boot-modes",
+    "href": "Documentation.html#zcu102-boot-modes",
+    "title": "Documentation",
+    "section": "ZCU102 Boot Modes",
+    "text": "ZCU102 Boot Modes\nJTAG is often used for programming and SD is for using Petalinux. Make sure the desired bootmode selected (SW6) before turning on the board.\n\n\n\nJTAG Boot Mode\n\n\n\n\n\nSD Boot Mode"
+  },
+  {
+    "objectID": "Documentation.html#petalinux-sd-card",
+    "href": "Documentation.html#petalinux-sd-card",
+    "title": "Documentation",
+    "section": "Petalinux SD Card",
+    "text": "Petalinux SD Card\n\n(Optional) setup sd boot image Download prebuilt image from Xilinx and burn image on to SD card insert sd card into FPGA board and set to SD boot mode"
   }
 ]

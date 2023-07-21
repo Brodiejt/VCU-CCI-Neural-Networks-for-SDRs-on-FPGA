@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -55,7 +55,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -68,33 +69,35 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./Documentation.html" aria-current="page">
+    <a class="nav-link active" href="./Documentation.html" rel="" target="" aria-current="page">
  <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Tutorials.qmd">
+    <a class="nav-link" href="./Tutorials.qmd" rel="" target="">
  <span class="menu-text">Tutorials</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Research.qmd">
+    <a class="nav-link" href="./Research.qmd" rel="" target="">
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Resources.html">
+    <a class="nav-link" href="./Resources.html" rel="" target="">
  <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -109,6 +112,23 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview-and-architecture" id="toc-overview-and-architecture" class="nav-link active" data-scroll-target="#overview-and-architecture">Overview and Architecture</a></li>
+  <li><a href="#software-installation" id="toc-software-installation" class="nav-link" data-scroll-target="#software-installation">Software Installation</a>
+  <ul class="collapse">
+  <li><a href="#vitis-vivado" id="toc-vitis-vivado" class="nav-link" data-scroll-target="#vitis-vivado">Vitis &amp; Vivado</a></li>
+  <li><a href="#cable-drivers" id="toc-cable-drivers" class="nav-link" data-scroll-target="#cable-drivers">Cable Drivers</a></li>
+  <li><a href="#rootless-docker" id="toc-rootless-docker" class="nav-link" data-scroll-target="#rootless-docker">Rootless Docker</a></li>
+  <li><a href="#vitis-ai" id="toc-vitis-ai" class="nav-link" data-scroll-target="#vitis-ai">Vitis-AI</a></li>
+  <li><a href="#petalinux-sd-card" id="toc-petalinux-sd-card" class="nav-link" data-scroll-target="#petalinux-sd-card">Petalinux SD Card</a></li>
+  </ul></li>
+  <li><a href="#board-setup" id="toc-board-setup" class="nav-link" data-scroll-target="#board-setup">Board Setup</a>
+  <ul class="collapse">
+  <li><a href="#zcu102-boot-modes" id="toc-zcu102-boot-modes" class="nav-link" data-scroll-target="#zcu102-boot-modes">ZCU102 Boot Modes</a></li>
+  <li><a href="#connecting-to-the-board" id="toc-connecting-to-the-board" class="nav-link" data-scroll-target="#connecting-to-the-board">Connecting to the Board</a>
+  <ul class="collapse">
+  <li><a href="#serial" id="toc-serial" class="nav-link" data-scroll-target="#serial">Serial</a></li>
+  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -134,8 +154,93 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview-and-architecture" class="level2">
 <h2 class="anchored" data-anchor-id="overview-and-architecture">Overview and Architecture</h2>
+</section>
+<section id="software-installation" class="level1">
+<h1>Software Installation</h1>
+<section id="vitis-vivado" class="level2">
+<h2 class="anchored" data-anchor-id="vitis-vivado">Vitis &amp; Vivado</h2>
+<p>You can find the Linux Self Extracting Web Installer AMD Unified Installer <!--[here](https://www.xilinx.com/support/download/index.htmlcontent/xilinx/en/downloadNav/vitis.html)--> <a href="https://www.xilinx.com/member/forms/download/xef.html?filename=Xilinx_Unified_2023.1_0507_1903_Lin64.bin">here</a>. Vivado comes with Vitis by default so there is no need to download them seperately.</p>
+<p>You will need root privileges to install the Vitis software.</p>
+<p>In order to download the installer you must first sign in and fill out the Download Center info.</p>
+<p>Navigate to where you downloaded the web installer and give it executable permissions <code>chmod 777 Xilinx_Unified_2023.1_0507_1903_Lin64.bin</code></p>
+<p>Run the installer.</p>
+<p>Click Next and then select Vitis.</p>
+<p>The Vitis suite can take up a lot of disk space. Luckily, for our purposes we only need a few of the options offered. Under <code>Design Tools</code>, all that is truly needed is Vitis, Vivado, and Vitis HLS. Under <code>Devices</code> the only one we need is <code>Zynq UltraScale+ MPSoC</code> in the <code>SoCs</code> section. After this agree to all.</p>
+<p>You can keep the install location the same, although many tutorials have the install location as <code>/opt/Xilinx</code> instead of <code>/tools/Xilinx</code>.</p>
+<p>Click Next and Install.</p>
+<p>If the installer gets stuck on getting something yadayada you may need to install ncurses and restart installer.</p>
+</section>
+<section id="cable-drivers" class="level2">
+<h2 class="anchored" data-anchor-id="cable-drivers">Cable Drivers</h2>
+<p>This step shouldn’t be necessary as the cable drivers come with installation of Vitis.</p>
+<p>In the event that they did not, they can be downloaded here.</p>
+<p>You should find the <code>install_drivers</code> script located here: <code>&lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers</code></p>
+<p>Running the <code>install_drivers</code> script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges.</p>
+</section>
+<section id="rootless-docker" class="level2">
+<h2 class="anchored" data-anchor-id="rootless-docker">Rootless Docker</h2>
+<p>Create a folder, for example <code>bin</code>, in your home directory to house Rootless Docker.</p>
+<p><code>cd</code> into the folder and run the following command <code>curl -fsSL https://get.docker.com/rootless | sh</code></p>
+<p>Now add the current directory to your path with <code>export PATH=$PATH:$(pwd)</code>.</p>
+</section>
+<section id="vitis-ai" class="level2">
+<h2 class="anchored" data-anchor-id="vitis-ai">Vitis-AI</h2>
+<p>First, clone the <a href="https://github.com/Xilinx/Vitis-AI">Vitis-AI repository</a> using <code>git clone https://github.com/Xilinx/Vitis-AI</code></p>
+<!--TODO-->
+<p>install vitis ai pytorch docker container Download prebuilt cpu docker image docker pull xilinx/vitis-ai-cpu:latest Build cpu docker image cd setup/docker ./docker_build_cpu.sh Run docker image: (May need to update run script) ./docker_run.sh xilinx/vitis-aicpu:latest</p>
+</section>
+<section id="petalinux-sd-card" class="level2">
+<h2 class="anchored" data-anchor-id="petalinux-sd-card">Petalinux SD Card</h2>
+<!--TODO-->
+<p>(Optional) setup sd boot image Download prebuilt image from Xilinx and burn image on to SD card insert sd card into FPGA board and set to SD boot mode</p>
+</section>
+</section>
+<section id="board-setup" class="level1">
+<h1>Board Setup</h1>
+<section id="zcu102-boot-modes" class="level2">
+<h2 class="anchored" data-anchor-id="zcu102-boot-modes">ZCU102 Boot Modes</h2>
+<p>JTAG is often used for programming and SD is for using Petalinux. Make sure the desired bootmode selected (SW6) before turning on the board.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="res/jtag_boot_mode.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">JTAG Boot Mode</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="res/sd_boot_mode.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SD Boot Mode</figcaption>
+</figure>
+</div>
+</section>
+<section id="connecting-to-the-board" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-to-the-board">Connecting to the Board</h2>
+<p>We can talk with the board in many ways, two of which are via serial and ethernet connections. Interacting with the Petalinux image aboard the ZCU102 can only be done when booted into SD mode.</p>
+<section id="serial" class="level3">
+<h3 class="anchored" data-anchor-id="serial">Serial</h3>
+<p>Make sure the micro USB cable is plugged into the UART port (J83?) on the board and the host machine. Turn on the board.</p>
+<p>The board should show up as <code>ttyUSB0</code>. You can check this by running <code>cat /dev/ | grep ttyUSB</code>. You should see <code>ttyUSB0</code> listed.</p>
+<p>You should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.</p>
+<!--- ![PuTTy Connection Settings](res/putty1.png) --->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="res/putty2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">PuTTy Connection Settings</figcaption>
+</figure>
+</div>
+<p>If you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.</p>
+</section>
+<section id="ssh" class="level3">
+<h3 class="anchored" data-anchor-id="ssh">SSH</h3>
+<p>VCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.</p>
+<p>Alternatively, a static IP can be given to the board by running <code>ifconfig eth0 &lt;IPAdress&gt;</code> on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.</p>
+<p>On the FPGA, run <code>ifconfig</code> to find the IP address of the board (eth0).</p>
+<p>Now you can connect to the board by running <code>ssh -X root@&lt;IPAddress&gt;</code> on the host machine.</p>
+<p>Note: <code>-X</code> enables X11 Forwarding, which is not necessary.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -166,9 +271,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -233,6 +352,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
