@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Spectrum Awareness in 5G Communication Systems</title>
+<title>Model Creation Workflow</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link" href="./index.html">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Setup and Installation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Model_workflow.html">
+    <a class="nav-link active" href="./Model_workflow.html" aria-current="page">
  <span class="menu-text">Model Creation and Deployment</span></a>
   </li>  
   <li class="nav-item">
@@ -104,9 +104,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-description" id="toc-project-description" class="nav-link active" data-scroll-target="#project-description">Project Description</a></li>
-  <li><a href="#technologies" id="toc-technologies" class="nav-link" data-scroll-target="#technologies">Technologies</a></li>
-  <li><a href="#collaborators-contact-info" id="toc-collaborators-contact-info" class="nav-link" data-scroll-target="#collaborators-contact-info">Collaborators + Contact Info</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link active" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#preparing-the-model" id="toc-preparing-the-model" class="nav-link" data-scroll-target="#preparing-the-model">Preparing the Model</a>
+  <ul class="collapse">
+  <li><a href="#inspection" id="toc-inspection" class="nav-link" data-scroll-target="#inspection">Inspection</a></li>
+  <li><a href="#quantization" id="toc-quantization" class="nav-link" data-scroll-target="#quantization">Quantization</a></li>
+  <li><a href="#compilation" id="toc-compilation" class="nav-link" data-scroll-target="#compilation">Compilation</a></li>
+  </ul></li>
+  <li><a href="#deploying-the-model-to-the-board" id="toc-deploying-the-model-to-the-board" class="nav-link" data-scroll-target="#deploying-the-model-to-the-board">Deploying the Model to the Board</a></li>
   </ul>
 </nav>
     </div>
@@ -115,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Spectrum Awareness in 5G Communication Systems</h1>
+<h1 class="title">Model Creation Workflow</h1>
 </div>
 
 
@@ -130,19 +135,31 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="project-description" class="level2">
-<h2 class="anchored" data-anchor-id="project-description">Project Description</h2>
-<p>Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions.</p>
+<section id="workflow" class="level1">
+<h1>Workflow</h1>
 </section>
-<section id="technologies" class="level2">
-<h2 class="anchored" data-anchor-id="technologies">Technologies</h2>
-<p>FPGA Board: Zynq UltraScale+ MPSoC ZCU102</p>
-<p>Software Defined Radios: Ettus USRP N210</p>
-<p>GNU Radio</p>
-<p>Python, Tensorflow</p>
+<section id="preparing-the-model" class="level1">
+<h1>Preparing the Model</h1>
+<section id="inspection" class="level2">
+<h2 class="anchored" data-anchor-id="inspection">Inspection</h2>
+<p>Vai_q_pytorch provides a function called inspector to help users diagnose neural network (NN) models under different device architectures. The inspector can predict target device assignments based on hardware constraints.The generated inspection report can be used to guide users to modify or optimize the NN model, greatly reducing the difficulty and time of deployment. It is recommended to inspect float models before quantization. All of this is done within a python script.</p>
+<p>First import the Inspector class</p>
+<p>Specify the target name of DPU, for the our FPGA board it is:</p>
+<p>Load the model, Create dummy input matching the input shape of the model along with a specified batch size, and run the inspection</p>
 </section>
-<section id="collaborators-contact-info" class="level2">
-<h2 class="anchored" data-anchor-id="collaborators-contact-info">Collaborators + Contact Info</h2>
+<section id="quantization" class="level2">
+<h2 class="anchored" data-anchor-id="quantization">Quantization</h2>
+<p>The Vitis AI Quantizer, integrated as a component of either TensorFlow or PyTorch, performs a calibration step in which a subset of the original training data (typically 100-1000 samples, no labels required) is forward propagated through the network to analyze the distribution of the activations at each layer. The weights and activations are then quantized as 8-bit integer values.</p>
+<p>First import torch and the quantizer class</p>
+<p>Then set up the paramters for the <code>torch_quantizer()function</code> and create a quantizer object</p>
+<p>Finally export the quantized model to a specified directory. The quantized model will be a <code>.xmodel</code> file</p>
+</section>
+<section id="compilation" class="level2">
+<h2 class="anchored" data-anchor-id="compilation">Compilation</h2>
+</section>
+</section>
+<section id="deploying-the-model-to-the-board" class="level1">
+<h1>Deploying the Model to the Board</h1>
 
 
 </section>

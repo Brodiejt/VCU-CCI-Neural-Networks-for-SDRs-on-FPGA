@@ -1,0 +1,78 @@
+---
+title: "Model Creation Workflow"
+format: 
+  html: 
+   toc: true
+execute:
+  enabled: false
+  echo: false
+  eval: false
+---
+
+
+# Workflow
+
+# Preparing the Model
+
+## Inspection
+Vai_q_pytorch provides a function called inspector to help users diagnose neural network (NN) models under different device architectures. The inspector can predict target device assignments based on hardware constraints.The generated inspection report can be used to guide users to modify or optimize the NN model, greatly reducing the difficulty and time of deployment. It is recommended to inspect float models before quantization. All of this is done within a python script.
+
+First import the Inspector class
+
+```{python}
+from pytorch_nndct.apis import torch_quantizer
+import torch
+from pytorch_nndct.apis import Inspector
+```
+
+
+Specify the target name of DPU, for the our FPGA board it is: 
+
+``` {python}
+target = ""
+inspector = Inspector(target)
+```
+
+Load the model, Create dummy input matching the input shape of the model along with a specified batch size, and run the inspection
+
+``` {python}
+model = torch.load("path_to_model")
+dummy_input = torch.randn(batch_size, input_shape_tuple)
+inspector.inspect(model, (dummy_input,), 'cpu',
+                  output_dir="inspection_output_directory")
+
+```
+
+
+
+## Quantization
+The Vitis AI Quantizer, integrated as a component of either TensorFlow or PyTorch, performs a calibration step in which a subset of the original training data (typically 100-1000 samples, no labels required) is forward propagated through the network to analyze the distribution of the activations at each layer. The weights and activations are then quantized as 8-bit integer values.
+
+First import torch and the quantizer class
+```{python}
+
+```
+
+
+Then set up the paramters for the ``` torch_quantizer()function ``` and create a quantizer object
+
+```{python}
+mode = 'float'
+model = 'path_to_compiled_model'
+dummy_input = torch.randn([batch_size], (input_shape))
+device = 'cpu'
+config_file = '/path_to_quantization_config_file'
+target = 'DPU_target_name'
+
+quantizer = torch_quantizer(mode, model, (dummy_input,),
+                            device=device, quant_config_file=config_file, target=target)
+```
+
+Finally export the quantized model to a specified directory. The quantized model will be a ```.xmodel``` file
+```{python}
+quantizer.export_xmodel('/path/to/output_directory')
+```
+
+## Compilation
+
+# Deploying the Model to the Board

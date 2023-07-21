@@ -9,11 +9,9 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - text: "Documentation"
+      - text: "Setup and Installation"
         file: Documentation.qmd
-      - text: "Tutorials"
-        file: Tutorials.qmd
-      - text: "Research"
-        file: Research.qmd
+      - text: "Model Creation and Deployment"
+        file: Model_workflow.qmd
       - text: "Resources"
         file: Resources.qmd

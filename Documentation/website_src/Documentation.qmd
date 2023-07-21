@@ -1,5 +1,5 @@
 ---
-title: "Documentation"
+title: "Setup"
 format: 
   html: 
    toc: true
@@ -53,28 +53,18 @@ Now add the current directory to your path with `export PATH=$PATH:$(pwd)`.
 
 First, clone the [Vitis-AI repository](https://github.com/Xilinx/Vitis-AI) using `git clone https://github.com/Xilinx/Vitis-AI`
 
-
-<!--TODO-->
-install vitis ai pytorch docker container
-Download prebuilt cpu docker image 
- docker pull xilinx/vitis-ai-cpu:latest
-Build cpu docker image
-cd setup/docker
- ./docker_build_cpu.sh
-Run docker image:  (May need to update run script)
- ./docker_run.sh xilinx/vitis-aicpu:latest
-
-
-## Petalinux SD Card
-
-<!--TODO-->
-(Optional) setup sd boot image
-Download prebuilt image from Xilinx and burn image on to SD card
-insert sd card into FPGA board and set to SD boot mode
+Next, download the prebuilt cpu docker image with the command `docker pull xilinx/vitis-ai-cpu:latest`
+cd to the "setup/docker" directory and run
+ `./docker_build_cpu.sh` to build the docker container
+Finally you should be able to run the docker image:  (May need to update run script)
+`./docker_run.sh xilinx/vitis-aicpu:latest`
 
 
 # Board Setup
 
+## Petalinux SD Card
+First, Download prebuilt image for the ZCU102 from Xilinx [here](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=xilinx-zcu102-dpu-v2022.2-v3.0.0.img.gz) and burn the image to the sd card
+Next, insert sd card into FPGA board and set to SD boot mode
 
 ## ZCU102 Boot Modes
 
