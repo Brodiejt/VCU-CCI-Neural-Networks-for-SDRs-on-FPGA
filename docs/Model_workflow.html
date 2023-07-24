@@ -187,9 +187,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_nndct.apis <span class="im">import</span> Inspector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Specify the target name of DPU, for our FPGA board it is:</p>
+<p>Specify the target name of DPU, for our FPGA board it is: “DPUCZDX8G_ISA1_B4096”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">""</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">"DPUCZDX8G_ISA1_B4096"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>inspector <span class="op">=</span> Inspector(target)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Load the model, Create dummy input matching the input shape of the model along with a specified batch size, and run the inspection</p>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dummy_input <span class="op">=</span> torch.randn([batch_size], (input_shape))</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cpu'</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>config_file <span class="op">=</span> <span class="st">'/path_to_quantization_config_file'</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">'DPU_target_name'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">'DPUCZDX8G_ISA1_B4096'</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>quantizer <span class="op">=</span> torch_quantizer(mode, model, (dummy_input,),</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                            device<span class="op">=</span>device, quant_config_file<span class="op">=</span>config_file, target<span class="op">=</span>target)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -237,7 +237,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The arch.json is the configuration file for the DPU it is usually located in <code>/opt/vitis_ai/compiler/arch</code></p>
+<p>The arch.json is the configuration file for our DPU it is located in <code>/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json</code></p>
 </div>
 </div>
 </section>

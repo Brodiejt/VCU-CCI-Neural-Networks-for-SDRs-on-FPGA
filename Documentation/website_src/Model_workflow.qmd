@@ -25,10 +25,10 @@ from pytorch_nndct.apis import Inspector
 ```
 
 
-Specify the target name of DPU, for our FPGA board it is: 
+Specify the target name of DPU, for our FPGA board it is: "DPUCZDX8G_ISA1_B4096"
 
 ``` {python}
-target = ""
+target = "DPUCZDX8G_ISA1_B4096"
 inspector = Inspector(target)
 ```
 
@@ -59,7 +59,7 @@ model = 'path_to_compiled_model'
 dummy_input = torch.randn([batch_size], (input_shape))
 device = 'cpu'
 config_file = '/path_to_quantization_config_file'
-target = 'DPU_target_name'
+target = 'DPUCZDX8G_ISA1_B4096'
 
 quantizer = torch_quantizer(mode, model, (dummy_input,),
                             device=device, quant_config_file=config_file, target=target)
@@ -80,7 +80,7 @@ For PyTorch, the quantizer NNDCT outputs the quantized model in the XIR format d
 ```vai_c_xir -x /PATH/TO/quantized.xmodel -a /PATH/TO/arch.json -o /OUTPUTPATH -n netname```
 
 :::{.callout-note}
-The arch.json is the configuration file for the DPU it is usually located in ```/opt/vitis_ai/compiler/arch```
+The arch.json is the configuration file for our DPU it is located in ```/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json```
 :::
 
 # Deploying the Model to the Board
