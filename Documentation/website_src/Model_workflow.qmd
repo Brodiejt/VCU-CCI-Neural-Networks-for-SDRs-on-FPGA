@@ -80,7 +80,7 @@ For PyTorch, the quantizer NNDCT outputs the quantized model in the XIR format d
 ```vai_c_xir -x /PATH/TO/quantized.xmodel -a /PATH/TO/arch.json -o /OUTPUTPATH -n netname```
 
 :::{.callout-note}
-The arch.json is the configuration file for our DPU it is located in ```/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json```
+The arch.json is the configuration file for the DPU. For our board this can be found in ```/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json```
 :::
 
 # Deploying the Model to the Board
