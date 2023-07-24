@@ -71,5 +71,67 @@ quantizer.export_xmodel('/path/to/output_directory')
 ```
 
 ## Compilation
+After parsing the topology of optimized and quantized input model, VAI_C constructs an internal computation graph as intermediate representation (IR). Therefore, a corresponding control flow and a data flow representation. It then performs multiple optimizations, for example, computation nodes fusion such as when batch norm is fused into a presiding convolution, efficient instruction scheduling by exploit inherent parallelism, or exploiting data reuse.
+
+Xilinx Intermediate Representation (XIR) is a graph-based intermediate representation of the AI algorithms which is designed for compilation and efficient deployment of the DPU on the FPGA platform. 
+
+For PyTorch, the quantizer NNDCT outputs the quantized model in the XIR format directly. Use vai_c_xir to compile it in the following command
+
+```vai_c_xir -x /PATH/TO/quantized.xmodel -a /PATH/TO/arch.json -o /OUTPUTPATH -n netname```
+
+:::{.callout-note}
+The arch.json is the configuration file for the DPU it is usually located in ```/opt/vitis_ai/compiler/arch```
+:::
 
 # Deploying the Model to the Board
+## Vitis AI Runtime Environment (VART)
+The Vitis AI Runtime (VART) is a set of API functions that support the integration of the DPU into software applications. VART provides a unified high-level runtime for both Data Center and Embedded targets. Key features of the Vitis AI Runtime API are:
+
+   - Asynchronous submission of jobs to the DPU.
+
+   - Asynchronous collection of jobs from the DPU.
+
+   - C++ and Python API implementations.
+
+   - Support for multi-threading and multi-process execution.
+
+You can write your applications with C++ or Python which calls the Vitis AI Runtime and Vitis AI Library to load and run the compiled model files.
+
+## Programming with VART
+The VART API in python provides the following class and methods
+```{python}
+class Runner:
+def __init__(self, path)
+def get_input_tensors(self)
+def get_output_tensors(self)
+def get_tensor_format(self)
+def execute_async(self, inputs, outputs)
+def wait(self, job_id)
+```
+:::{.callout-note}
+inputs and outputs are numpy arrays with C memory layout the numpy arrays should be reused as their internal buffer pointers are passed to the runtime. These buffer pointers may be memory-mapped to the FPGA DDR for performance.
+:::
+
+1. Get DPU subgraph by parsing model file
+```{python}
+subgraph = xir.Graph.deserialize(xmodel_file)
+```
+2. Create Runner object from subgraph
+```{python}
+dpu_runner = runner.Runner(subgraph，"run")
+```
+
+3. Popuplate input and output tensors
+```{python}
+fpgaInput = runner.get_inputs()
+fpgaOutput = runner.get_outputs()
+```
+4. Run the model on the DPU
+```{python}
+jid = dpu_runner.execute_async(fpgaInput, fpgaOutput)
+```
+
+5. Wait for the specified job using its ID (jid)
+```{python}
+dpu_runner.wait(jid)
+```

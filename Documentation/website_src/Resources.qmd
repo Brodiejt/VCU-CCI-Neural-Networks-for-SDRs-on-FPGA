@@ -12,6 +12,7 @@ format:
 
 [Developement Flow for UltraScale+ MPSoC](https://docs.xilinx.com/r/2021.1-English/ug1137-zynq-ultrascale-mpsoc-swdev/Software-Development-Flow)
 
+
 ## MATLAB
 [Getting Started with Zynq UltraScale+ MPSoC Platform](https://www.mathworks.com/help/hdlcoder/ug/getting-started-with-hardware-software-codesign-workflow-for-zynq-ultrascale-mpsoc-devices.html)
 
@@ -24,6 +25,6 @@ format:
 
 [Using Vitis With RNNs](https://docs.xilinx.com/r/en-US/ug1563-vitis-ai-rnn/Overview)
 
-
+[DPUCZDX8G for Zynq UltraScale+ MPSoCs Product Guide](https://docs.xilinx.com/r/4.0-English/pg338-dpu/Introduction?tocId=Bd4R4bhnWgMYE6wUISXDLw)
 
 ## Vivado

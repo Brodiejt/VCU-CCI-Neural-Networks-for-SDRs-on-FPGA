@@ -1,10 +1,101 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Spectrum Awareness in 5G Communication Systems",
+    "section": "",
+    "text": "Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions."
+  },
+  {
+    "objectID": "index.html#project-description",
+    "href": "index.html#project-description",
+    "title": "Spectrum Awareness in 5G Communication Systems",
+    "section": "",
+    "text": "Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions."
+  },
+  {
+    "objectID": "index.html#technologies",
+    "href": "index.html#technologies",
+    "title": "Spectrum Awareness in 5G Communication Systems",
+    "section": "Technologies",
+    "text": "Technologies\nFPGA Board: Zynq UltraScale+ MPSoC ZCU102\nSoftware Defined Radios: Ettus USRP N210\nGNU Radio\nPython, Tensorflow"
+  },
+  {
+    "objectID": "index.html#collaborators-contact-info",
+    "href": "index.html#collaborators-contact-info",
+    "title": "Spectrum Awareness in 5G Communication Systems",
+    "section": "Collaborators + Contact Info",
+    "text": "Collaborators + Contact Info"
+  },
+  {
+    "objectID": "Resources.html",
+    "href": "Resources.html",
+    "title": "Useful Resources",
+    "section": "",
+    "text": "ZCU102 Evaluation Board\nZCU102 QuickStart Guide\nDevelopement Flow for UltraScale+ MPSoC"
+  },
+  {
+    "objectID": "Resources.html#fpga-board-specs-and-info",
+    "href": "Resources.html#fpga-board-specs-and-info",
+    "title": "Useful Resources",
+    "section": "",
+    "text": "ZCU102 Evaluation Board\nZCU102 QuickStart Guide\nDevelopement Flow for UltraScale+ MPSoC"
+  },
+  {
+    "objectID": "Resources.html#matlab",
+    "href": "Resources.html#matlab",
+    "title": "Useful Resources",
+    "section": "MATLAB",
+    "text": "MATLAB\nGetting Started with Zynq UltraScale+ MPSoC Platform"
+  },
+  {
+    "objectID": "Resources.html#vitis",
+    "href": "Resources.html#vitis",
+    "title": "Useful Resources",
+    "section": "Vitis",
+    "text": "Vitis\nVitis Documentation Tutorials\nVitis AI Tutorials + Examples\nVitis AI Model Preparation Tutorial\nUsing Vitis With RNNs\nDPUCZDX8G for Zynq UltraScale+ MPSoCs Product Guide"
+  },
+  {
+    "objectID": "Resources.html#vivado",
+    "href": "Resources.html#vivado",
+    "title": "Useful Resources",
+    "section": "Vivado",
+    "text": "Vivado"
+  },
+  {
     "objectID": "Documentation.html",
     "href": "Documentation.html",
     "title": "Setup and Installation",
     "section": "",
-    "text": "You can find the Linux Self Extracting Web Installer AMD Unified Installer  here. Vivado comes with Vitis by default so there is no need to download them seperately.\nYou will need root privileges to install the Vitis software.\nIn order to download the installer you must first sign in and fill out the Download Center info.\nNavigate to where you downloaded the web installer and give it executable permissions chmod 777 Xilinx_Unified_2023.1_0507_1903_Lin64.bin\nRun the installer.\nClick Next and then select Vitis.\nThe Vitis suite can take up a lot of disk space. Luckily, for our purposes we only need a few of the options offered. Under Design Tools, all that is truly needed is Vitis, Vivado, and Vitis HLS. Under Devices the only one we need is Zynq UltraScale+ MPSoC in the SoCs section. After this agree to all.\nYou can keep the install location the same, although many tutorials have the install location as /opt/Xilinx instead of /tools/Xilinx.\nClick Next and Install.\nIf the installer gets stuck on getting something yadayada you may need to install ncurses and restart installer.\n\n\n\nThis step shouldn’t be necessary as the cable drivers come with installation of Vitis. In the event that they did not, they can be downloaded here.\nYou should find the install_drivers script located here: <PathToXilinxRootFolder>/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers\nRunning the install_drivers script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges.\n\n\n\nCreate a folder, for example bin, in your home directory to house Rootless Docker.\ncd into the folder and run the following command curl -fsSL https://get.docker.com/rootless | sh\nNow add the current directory to your path with export PATH=$PATH:$(pwd).\n\n\n\nFirst, clone the Vitis-AI repository using git clone https://github.com/Xilinx/Vitis-AI\nNext, download the prebuilt cpu docker image with the command docker pull xilinx/vitis-ai-cpu:latest\ncd to the “setup/docker” directory and run\n./docker_build_cpu.sh to build the docker container\nFinally you should be able to run the docker image: (May need to update run script)\n./docker_run.sh xilinx/vitis-aicpu:latest"
+    "text": "You can find the Linux Self Extracting Web Installer AMD Unified Installer  here. Vivado comes with Vitis by default so there is no need to download them seperately.\nYou will need root privileges to install the Vitis software.\nIn order to download the installer you must first sign in and fill out the Download Center info.\nNavigate to where you downloaded the web installer and give it executable permissions chmod 777 Xilinx_Unified_2023.1_0507_1903_Lin64.bin\nRun the installer.\nClick Next and then select Vitis.\nThe Vitis suite can take up a lot of disk space. Luckily, for our purposes we only need a few of the options offered. Under Design Tools, all that is truly needed is Vitis, Vivado, and Vitis HLS. Under Devices the only one we need is Zynq UltraScale+ MPSoC in the SoCs section. After this agree to all.\nYou can keep the install location the same, although many tutorials have the install location as /opt/Xilinx instead of /tools/Xilinx.\nClick Next and Install.\nIf the installer gets stuck on getting something yadayada you may need to install ncurses and restart installer.\n\n\n\nThis step shouldn’t be necessary as the cable drivers come with installation of Vitis. In the event that they did not, they can be downloaded here.\nYou should find the install_drivers script located here: &lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers\nRunning the install_drivers script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges.\n\n\n\nCreate a folder, for example bin, in your home directory to house Rootless Docker.\ncd into the folder and run the following command curl -fsSL https://get.docker.com/rootless | sh\nNow add the current directory to your path with export PATH=$PATH:$(pwd).\n\n\n\nFirst, clone the Vitis-AI repository using git clone https://github.com/Xilinx/Vitis-AI\nNext, download the prebuilt cpu docker image with the command docker pull xilinx/vitis-ai-cpu:latest\ncd to the “setup/docker” directory and run\n./docker_build_cpu.sh to build the docker container\nFinally you should be able to run the docker image: (May need to update run script)\n./docker_run.sh xilinx/vitis-aicpu:latest"
+  },
+  {
+    "objectID": "Documentation.html#vitis-vivado",
+    "href": "Documentation.html#vitis-vivado",
+    "title": "Setup and Installation",
+    "section": "",
+    "text": "You can find the Linux Self Extracting Web Installer AMD Unified Installer  here. Vivado comes with Vitis by default so there is no need to download them seperately.\nYou will need root privileges to install the Vitis software.\nIn order to download the installer you must first sign in and fill out the Download Center info.\nNavigate to where you downloaded the web installer and give it executable permissions chmod 777 Xilinx_Unified_2023.1_0507_1903_Lin64.bin\nRun the installer.\nClick Next and then select Vitis.\nThe Vitis suite can take up a lot of disk space. Luckily, for our purposes we only need a few of the options offered. Under Design Tools, all that is truly needed is Vitis, Vivado, and Vitis HLS. Under Devices the only one we need is Zynq UltraScale+ MPSoC in the SoCs section. After this agree to all.\nYou can keep the install location the same, although many tutorials have the install location as /opt/Xilinx instead of /tools/Xilinx.\nClick Next and Install.\nIf the installer gets stuck on getting something yadayada you may need to install ncurses and restart installer."
+  },
+  {
+    "objectID": "Documentation.html#cable-drivers",
+    "href": "Documentation.html#cable-drivers",
+    "title": "Setup and Installation",
+    "section": "",
+    "text": "This step shouldn’t be necessary as the cable drivers come with installation of Vitis. In the event that they did not, they can be downloaded here.\nYou should find the install_drivers script located here: &lt;PathToXilinxRootFolder&gt;/Vivado/2023.1/data/xicom/cable_drivers/lin64/install_script/install_drivers\nRunning the install_drivers script will set up permissions for both Xilinx FTDI and Digilent cable drivers. This action requires root privileges."
+  },
+  {
+    "objectID": "Documentation.html#rootless-docker",
+    "href": "Documentation.html#rootless-docker",
+    "title": "Setup and Installation",
+    "section": "",
+    "text": "Create a folder, for example bin, in your home directory to house Rootless Docker.\ncd into the folder and run the following command curl -fsSL https://get.docker.com/rootless | sh\nNow add the current directory to your path with export PATH=$PATH:$(pwd)."
+  },
+  {
+    "objectID": "Documentation.html#vitis-ai",
+    "href": "Documentation.html#vitis-ai",
+    "title": "Setup and Installation",
+    "section": "",
+    "text": "First, clone the Vitis-AI repository using git clone https://github.com/Xilinx/Vitis-AI\nNext, download the prebuilt cpu docker image with the command docker pull xilinx/vitis-ai-cpu:latest\ncd to the “setup/docker” directory and run\n./docker_build_cpu.sh to build the docker container\nFinally you should be able to run the docker image: (May need to update run script)\n./docker_run.sh xilinx/vitis-aicpu:latest"
   },
   {
     "objectID": "Documentation.html#petalinux-sd-card",
@@ -25,28 +116,7 @@
     "href": "Documentation.html#connecting-to-the-board",
     "title": "Setup and Installation",
     "section": "Connecting to the Board",
-    "text": "Connecting to the Board\nWe can talk with the board in many ways, two of which are via serial and ethernet connections. Interacting with the Petalinux image aboard the ZCU102 can only be done when booted into SD mode.\n\nSerial\nMake sure the micro USB cable is plugged into the UART port (J83?) on the board and the host machine. Turn on the board.\nThe board should show up as ttyUSB0. You can check this by running cat /dev/ | grep ttyUSB. You should see ttyUSB0 listed.\nYou should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.\n\n\n\n\nPuTTy Settings\n\n\nIf you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.\n\n\nSSH\nTo use ssh the board must have an IP Address. It can get it one of two ways:\n\nVCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.\nAlternatively, a static IP can be given to the board by running ifconfig eth0 <IPAddress> on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.\n\nOn the FPGA, run ifconfig to find the IP address of the board (eth0).\nNow you can connect to the board by running ssh -X root@<IPAddress> on the host machine.\n\n\n\n\n\n\nNote\n\n\n\n-X enables X11 Forwarding, which is not necessary.\n\n\nIf ssh fails, make sure that both devices can reach eachother using ping. Also make sure that both the board and the host machine can successfully ping the default gateway."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Spectrum Awareness in 5G Communication Systems",
-    "section": "",
-    "text": "Spectrum is a scarce radio resource that has been assigned for different application and to different service providers. However, the spectrum is underutilized. To fully exploit the spectrum, vacant spectrum bands need to be first identified. This project seeks to collect spectrum information (IQ Samples) to create and train Reccurent Neural Networks to predict open channels for communication. Two reccurent neural networks (GRU and LSTM) will be compiled and run on an FPGA board for faster/more accurate predictions."
-  },
-  {
-    "objectID": "index.html#technologies",
-    "href": "index.html#technologies",
-    "title": "Spectrum Awareness in 5G Communication Systems",
-    "section": "Technologies",
-    "text": "Technologies\nFPGA Board: Zynq UltraScale+ MPSoC ZCU102\nSoftware Defined Radios: Ettus USRP N210\nGNU Radio\nPython, Tensorflow"
-  },
-  {
-    "objectID": "index.html#collaborators-contact-info",
-    "href": "index.html#collaborators-contact-info",
-    "title": "Spectrum Awareness in 5G Communication Systems",
-    "section": "Collaborators + Contact Info",
-    "text": "Collaborators + Contact Info"
+    "text": "Connecting to the Board\nWe can talk with the board in many ways, two of which are via serial and ethernet connections. Interacting with the Petalinux image aboard the ZCU102 can only be done when booted into SD mode.\n\nSerial\nMake sure the micro USB cable is plugged into the UART port (J83?) on the board and the host machine. Turn on the board.\nThe board should show up as ttyUSB0. You can check this by running cat /dev/ | grep ttyUSB. You should see ttyUSB0 listed.\nYou should now be able to connect to the board using a serial communication program such as minicom or PuTTy. Use 8N1 (default parity settings) and a baudrate of 115200.\n\n\n\n\nPuTTy Settings\n\n\nIf you have issues, reseat the USB cable into the host machine and check the connection. If problems persist, check that the cable drivers are properly installed.\n\n\nSSH\nTo use ssh the board must have an IP Address. It can get it one of two ways:\n\nVCU SafeNet Wireless network will assign the board an IP address via DHCP. Just connect the board to an available network ethernet cable. This is the recommended method.\nAlternatively, a static IP can be given to the board by running ifconfig eth0 &lt;IPAddress&gt; on the board. This may interfere with the DHCP running on the VCU network and might not work as intended. This method is not recommended.\n\nOn the FPGA, run ifconfig to find the IP address of the board (eth0).\nNow you can connect to the board by running ssh -X root@&lt;IPAddress&gt; on the host machine.\n\n\n\n\n\n\nNote\n\n\n\n-X enables X11 Forwarding, which is not necessary.\n\n\nIf ssh fails, make sure that both devices can reach eachother using ping. Also make sure that both the board and the host machine can successfully ping the default gateway."
   },
   {
     "objectID": "Model_workflow.html",
@@ -74,34 +144,20 @@
     "href": "Model_workflow.html#compilation",
     "title": "Model Creation Workflow",
     "section": "Compilation",
-    "text": "Compilation"
+    "text": "Compilation\nAfter parsing the topology of optimized and quantized input model, VAI_C constructs an internal computation graph as intermediate representation (IR). Therefore, a corresponding control flow and a data flow representation. It then performs multiple optimizations, for example, computation nodes fusion such as when batch norm is fused into a presiding convolution, efficient instruction scheduling by exploit inherent parallelism, or exploiting data reuse.\nXilinx Intermediate Representation (XIR) is a graph-based intermediate representation of the AI algorithms which is designed for compilation and efficient deployment of the DPU on the FPGA platform.\nFor PyTorch, the quantizer NNDCT outputs the quantized model in the XIR format directly. Use vai_c_xir to compile it in the following command\nvai_c_xir -x /PATH/TO/quantized.xmodel -a /PATH/TO/arch.json -o /OUTPUTPATH -n netname\n\n\n\n\n\n\nNote\n\n\n\nThe arch.json is the configuration file for the DPU it is usually located in /opt/vitis_ai/compiler/arch"
   },
   {
-    "objectID": "Resources.html",
-    "href": "Resources.html",
-    "title": "Useful Resources",
-    "section": "",
-    "text": "ZCU102 Evaluation Board\nZCU102 QuickStart Guide\nDevelopement Flow for UltraScale+ MPSoC"
+    "objectID": "Model_workflow.html#vitis-ai-runtime-environment-vart",
+    "href": "Model_workflow.html#vitis-ai-runtime-environment-vart",
+    "title": "Model Creation Workflow",
+    "section": "Vitis AI Runtime Environment (VART)",
+    "text": "Vitis AI Runtime Environment (VART)\nThe Vitis AI Runtime (VART) is a set of API functions that support the integration of the DPU into software applications. VART provides a unified high-level runtime for both Data Center and Embedded targets. Key features of the Vitis AI Runtime API are:\n\nAsynchronous submission of jobs to the DPU.\nAsynchronous collection of jobs from the DPU.\nC++ and Python API implementations.\nSupport for multi-threading and multi-process execution.\n\nYou can write your applications with C++ or Python which calls the Vitis AI Runtime and Vitis AI Library to load and run the compiled model files."
   },
   {
-    "objectID": "Resources.html#matlab",
-    "href": "Resources.html#matlab",
-    "title": "Useful Resources",
-    "section": "MATLAB",
-    "text": "MATLAB\nGetting Started with Zynq UltraScale+ MPSoC Platform"
-  },
-  {
-    "objectID": "Resources.html#vitis",
-    "href": "Resources.html#vitis",
-    "title": "Useful Resources",
-    "section": "Vitis",
-    "text": "Vitis\nVitis Documentation Tutorials\nVitis AI Tutorials + Examples\nVitis AI Model Preparation Tutorial\nUsing Vitis With RNNs"
-  },
-  {
-    "objectID": "Resources.html#vivado",
-    "href": "Resources.html#vivado",
-    "title": "Useful Resources",
-    "section": "Vivado",
-    "text": "Vivado"
+    "objectID": "Model_workflow.html#programming-with-vart",
+    "href": "Model_workflow.html#programming-with-vart",
+    "title": "Model Creation Workflow",
+    "section": "Programming with VART",
+    "text": "Programming with VART\nThe VART API in python provides the following class and methods\n\nclass Runner:\ndef __init__(self, path)\ndef get_input_tensors(self)\ndef get_output_tensors(self)\ndef get_tensor_format(self)\ndef execute_async(self, inputs, outputs)\ndef wait(self, job_id)\n\n\n\n\n\n\n\nNote\n\n\n\ninputs and outputs are numpy arrays with C memory layout the numpy arrays should be reused as their internal buffer pointers are passed to the runtime. These buffer pointers may be memory-mapped to the FPGA DDR for performance.\n\n\n\nGet DPU subgraph by parsing model file\n\n\nsubgraph = xir.Graph.deserialize(xmodel_file)\n\n\nCreate Runner object from subgraph\n\n\ndpu_runner = runner.Runner(subgraph，\"run\")\n\n\nPopuplate input and output tensors\n\n\nfpgaInput = runner.get_inputs()\nfpgaOutput = runner.get_outputs()\n\n\nRun the model on the DPU\n\n\njid = dpu_runner.execute_async(fpgaInput, fpgaOutput)\n\n\nWait for the specified job using its ID (jid)\n\n\ndpu_runner.wait(jid)"
   }
 ]
