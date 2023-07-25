@@ -37,7 +37,7 @@ Load the model, Create dummy input matching the input shape of the model along w
 ``` {python}
 #Load model (pytorch)
 model = TheModelClass(*args, **kwargs)
-model.load_state_dict(torch.load(/PATH/TO/MODEL))
+model.load_state_dict(torch.load(PATH/TO/Model.pth))
 model.eval()
 
 dummy_input = torch.randn(batch_size, input_shape_tuple)
@@ -59,18 +59,18 @@ Then set up the paramters for the ``` torch_quantizer()  function ``` and create
 
 ```{python}
 #Load model (pytorch)
-model = TheModelClass(*args, **kwargs)
-model.load_state_dict(torch.load(/PATH/TO/MODEL))
+model = TheModelClass(*args, **kwargs) 
+model.load_state_dict(torch.load(PATH/TO/Model.pth))
 model.eval()
 
-mode = 'float'
+mode = 'calib'
 dummy_input = torch.randn([batch_size], (input_shape))
 device = 'cpu'
 target = 'DPUCZDX8G_ISA1_B4096'
 
 quantizer = torch_quantizer(mode, model, (dummy_input,),
                             device=torch.device("cpu"),  target=target)
-                            
+
 quant_model = quantizer.quant_model
 ```
 
