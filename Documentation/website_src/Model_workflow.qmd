@@ -35,9 +35,13 @@ inspector = Inspector(target)
 Load the model, Create dummy input matching the input shape of the model along with a specified batch size, and run the inspection
 
 ``` {python}
-model = torch.load("path_to_model")
+#Load model (pytorch)
+model = TheModelClass(*args, **kwargs)
+model.load_state_dict(torch.load(/PATH/TO/MODEL))
+model.eval()
+
 dummy_input = torch.randn(batch_size, input_shape_tuple)
-inspector.inspect(model, (dummy_input,), 'cpu',
+inspector.inspect(model, (dummy_input,), device=torch.device("cpu"),
                   output_dir="inspection_output_directory")
 
 ```
@@ -54,15 +58,20 @@ First import torch and the quantizer class
 Then set up the paramters for the ``` torch_quantizer()  function ``` and create a quantizer object
 
 ```{python}
+#Load model (pytorch)
+model = TheModelClass(*args, **kwargs)
+model.load_state_dict(torch.load(/PATH/TO/MODEL))
+model.eval()
+
 mode = 'float'
-model = 'path_to_compiled_model'
 dummy_input = torch.randn([batch_size], (input_shape))
 device = 'cpu'
-config_file = '/path_to_quantization_config_file'
 target = 'DPUCZDX8G_ISA1_B4096'
 
 quantizer = torch_quantizer(mode, model, (dummy_input,),
-                            device=device, quant_config_file=config_file, target=target)
+                            device=torch.device("cpu"),  target=target)
+                            
+quant_model = quantizer.quant_model
 ```
 
 Finally export the quantized model to a specified directory. The quantized model will be a ```.xmodel``` file

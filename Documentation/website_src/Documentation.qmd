@@ -57,11 +57,13 @@ Next, download the prebuilt cpu docker image with the command `docker pull xilin
 
 `./docker_build_cpu.sh` to build the docker container
 
-Finally you should be able to run the docker image:  (May need to update run script)
+Then, you should be able to run the docker image:  (May need to update run script)
 
 `./docker_run.sh xilinx/vitis-aicpu:latest`
 
+Finally activate the conda environment for pytorch
 
+`conda activate vitis-ai-pytorch`
 # Board Setup
 
 ## Petalinux SD Card

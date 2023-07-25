@@ -194,10 +194,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Load the model, Create dummy input matching the input shape of the model along with a specified batch size, and run the inspection</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> torch.load(<span class="st">"path_to_model"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dummy_input <span class="op">=</span> torch.randn(batch_size, input_shape_tuple)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>inspector.inspect(model, (dummy_input,), <span class="st">'cpu'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                  output_dir<span class="op">=</span><span class="st">"inspection_output_directory"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load model (pytorch)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TheModelClass(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>model.load_state_dict(torch.load(<span class="op">/</span>PATH<span class="op">/</span>TO<span class="op">/</span>MODEL))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dummy_input <span class="op">=</span> torch.randn(batch_size, input_shape_tuple)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>inspector.inspect(model, (dummy_input,), device<span class="op">=</span>torch.device(<span class="st">"cpu"</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                  output_dir<span class="op">=</span><span class="st">"inspection_output_directory"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="quantization" class="level2">
@@ -206,15 +210,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>First import torch and the quantizer class <code>from pytorch_nndct.apis import torch_quantizer</code></p>
 <p>Then set up the paramters for the <code>torch_quantizer()  function</code> and create a quantizer object</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mode <span class="op">=</span> <span class="st">'float'</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> <span class="st">'path_to_compiled_model'</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dummy_input <span class="op">=</span> torch.randn([batch_size], (input_shape))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cpu'</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>config_file <span class="op">=</span> <span class="st">'/path_to_quantization_config_file'</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">'DPUCZDX8G_ISA1_B4096'</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>quantizer <span class="op">=</span> torch_quantizer(mode, model, (dummy_input,),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                            device<span class="op">=</span>device, quant_config_file<span class="op">=</span>config_file, target<span class="op">=</span>target)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load model (pytorch)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TheModelClass(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>model.load_state_dict(torch.load(<span class="op">/</span>PATH<span class="op">/</span>TO<span class="op">/</span>MODEL))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>mode <span class="op">=</span> <span class="st">'float'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>dummy_input <span class="op">=</span> torch.randn([batch_size], (input_shape))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cpu'</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">'DPUCZDX8G_ISA1_B4096'</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>quantizer <span class="op">=</span> torch_quantizer(mode, model, (dummy_input,),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                            device<span class="op">=</span>torch.device(<span class="st">"cpu"</span>),  target<span class="op">=</span>target)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                            </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>quant_model <span class="op">=</span> quantizer.quant_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally export the quantized model to a specified directory. The quantized model will be a <code>.xmodel</code> file</p>
 <div class="cell">
