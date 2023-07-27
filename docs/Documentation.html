@@ -113,9 +113,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#cable-drivers" id="toc-cable-drivers" class="nav-link" data-scroll-target="#cable-drivers">Cable Drivers</a></li>
   <li><a href="#rootless-docker" id="toc-rootless-docker" class="nav-link" data-scroll-target="#rootless-docker">Rootless Docker</a></li>
   <li><a href="#vitis-ai" id="toc-vitis-ai" class="nav-link" data-scroll-target="#vitis-ai">Vitis-AI</a></li>
-  </ul></li>
-  <li><a href="#board-setup" id="toc-board-setup" class="nav-link" data-scroll-target="#board-setup">Board Setup</a>
-  <ul class="collapse">
   <li><a href="#petalinux-sd-card" id="toc-petalinux-sd-card" class="nav-link" data-scroll-target="#petalinux-sd-card">Petalinux SD Card</a></li>
   <li><a href="#zcu102-boot-modes" id="toc-zcu102-boot-modes" class="nav-link" data-scroll-target="#zcu102-boot-modes">ZCU102 Boot Modes</a></li>
   <li><a href="#connecting-to-the-board" id="toc-connecting-to-the-board" class="nav-link" data-scroll-target="#connecting-to-the-board">Connecting to the Board</a>
@@ -178,14 +175,17 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="vitis-ai">Vitis-AI</h2>
 <p>First, clone the <a href="https://github.com/Xilinx/Vitis-AI">Vitis-AI repository</a> using <code>git clone https://github.com/Xilinx/Vitis-AI</code></p>
 <p>Next, download the prebuilt cpu docker image with the command <code>docker pull xilinx/vitis-ai-cpu:latest</code></p>
-<p><code>cd</code> to the “setup/docker” directory and run</p>
-<p><code>./docker_build_cpu.sh</code> to build the docker container</p>
-<p>Finally you should be able to run the docker image: (May need to update run script)</p>
-<p><code>./docker_run.sh xilinx/vitis-aicpu:latest</code></p>
+<p><code>cd</code> to the directory where you cloned the Vitis AI repository</p>
+<p>Next use any text editor to open the <code>docker_run.sh</code> file and remove the lines under the <code>docker_run_params</code> function:</p>
+<p><code>-v /opt/xilinx/dsa:/opt/xilinx/dsa \</code></p>
+<p><code>-v /opt/xilinx/overlaybins:/opt/xilinx/overlaybins</code></p>
+<p><code>-e USER=$user -e UID=$uid -e GID=$gid</code></p>
+<p>then save and close the file.</p>
+<p>Then, you should be able to run the docker image:</p>
+<p><code>./docker_run.sh xilinx/vitis-ai-cpu:latest</code></p>
+<p>Finally activate the conda environment for pytorch</p>
+<p><code>conda activate vitis-ai-pytorch</code> # Board Setup</p>
 </section>
-</section>
-<section id="board-setup" class="level1">
-<h1>Board Setup</h1>
 <section id="petalinux-sd-card" class="level2">
 <h2 class="anchored" data-anchor-id="petalinux-sd-card">Petalinux SD Card</h2>
 <p>First, Download prebuilt image for the ZCU102 from Xilinx <a href="https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=xilinx-zcu102-dpu-v2022.2-v3.0.0.img.gz">here</a> and burn the image to the sd card Next, insert sd card into FPGA board and set to SD boot mode</p>

@@ -53,13 +53,21 @@ First, clone the [Vitis-AI repository](https://github.com/Xilinx/Vitis-AI) using
 
 Next, download the prebuilt cpu docker image with the command `docker pull xilinx/vitis-ai-cpu:latest`
 
-`cd` to the "setup/docker" directory and run
+`cd` to the directory where you cloned the Vitis AI repository
 
-`./docker_build_cpu.sh` to build the docker container
+Next use any text editor to open the `docker_run.sh` file and remove the lines under the `docker_run_params` function:
 
-Then, you should be able to run the docker image:  (May need to update run script)
+`-v /opt/xilinx/dsa:/opt/xilinx/dsa \`
 
-`./docker_run.sh xilinx/vitis-aicpu:latest`
+`-v /opt/xilinx/overlaybins:/opt/xilinx/overlaybins `
+
+`-e USER=$user -e UID=$uid -e GID=$gid `
+
+then save and close the file.
+
+Then, you should be able to run the docker image: 
+
+`./docker_run.sh xilinx/vitis-ai-cpu:latest`
 
 Finally activate the conda environment for pytorch
 
