@@ -176,11 +176,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p><img src="res/vitis_ai_workflow.png" class="img-fluid" alt="Vitis AI Developer Workflow"> Here is the devlopement workflow for creating and deploying neural networks onto the fpga board. In this section we only have to focus on steps 1 and 3 because the hardware and DPU are already installed onto the boot image stored on the SD card. Once you have your trained model you can then inspect, quantize, and compile the model for the FPGA board. Once the model is prepared, you will use the Vitis AI runtime environment (VART) API calls in your code to run the model on the board.</p>
+<p>The tools for preapring the model are found in the Vitis-AI docker container. Execute <code>./docker_run.sh xilinx/vitis-ai-cpu:latest</code> to run the container. Once inside, use <code>conda activate vitis-ai-pytorch</code> to activate the Vitis-AI Pytorch environment. Here is where you create and run your scripts to prepare the model for the FPGA board.</p>
 <section id="preparing-the-model" class="level1">
 <h1>Preparing the Model</h1>
 <section id="inspection" class="level2">
 <h2 class="anchored" data-anchor-id="inspection">Inspection</h2>
 <p>Vai_q_pytorch provides a function called inspector to help users diagnose neural network (NN) models under different device architectures. The inspector can predict target device assignments based on hardware constraints.The generated inspection report can be used to guide users to modify or optimize the NN model, greatly reducing the difficulty and time of deployment. It is recommended to inspect float models before quantization. All of this is done within a python script.</p>
+<p><a href="https://docs.xilinx.com/r/1.4.1-English/ug1414-vitis-ai/Operators-Supported-by-PyTorch">Here</a> is a list of supported layers that can be run on the DPU</p>
 <p>First import the Inspector class</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_nndct.apis <span class="im">import</span> torch_quantizer</span>
