@@ -18,6 +18,8 @@ The tools for preapring the model are found in the Vitis-AI docker container. Ex
 ## Inspection
 Vai_q_pytorch provides a function called inspector to help users diagnose neural network (NN) models under different device architectures. The inspector can predict target device assignments based on hardware constraints.The generated inspection report can be used to guide users to modify or optimize the NN model, greatly reducing the difficulty and time of deployment. It is recommended to inspect float models before quantization. All of this is done within a python script.
 
+[Here](https://docs.xilinx.com/r/1.4.1-English/ug1414-vitis-ai/Operators-Supported-by-PyTorch) is a list of supported layers that can be run on the DPU
+
 First import the Inspector class
 
 ```{python}
