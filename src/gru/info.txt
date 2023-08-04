@@ -1,0 +1,26 @@
+all weights and biases for every cell in same layer are same
+gru has reset and update gates:
+    reset determines how much previous state should be forgotten
+    update dtermines how much of the input should be used to update hidden state
+    w=weight
+    hs = previous hidden state
+    reset gate:sigmoid(w_1*input + w_2*prev_hs)
+
+    update gate: sigmoid(w_3*input + w_4*prev_hs)
+
+    hs_hat = tanh(w_5*input + hadamard_mul(reset_gate, w_6*prev_hs))
+
+    current_hs = hadamard_mul(update_gate, prev_hs) + hadamard_mul((1-update_gate), hs_hat)
+
+need to hot encode data
+
+LINKS:
+
+https://github.com/erikvdplas/gru-rnn/blob/master/main.py
+
+https://towardsdatascience.com/gate-recurrent-units-explained-using-matrices-part-1-3c781469fc18
+
+https://www.geeksforgeeks.org/ml-neural-network-implementation-in-c-from-scratch/
+
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+
