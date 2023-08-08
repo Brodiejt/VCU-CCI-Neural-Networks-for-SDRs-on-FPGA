@@ -7,24 +7,27 @@
 using namespace Eigen;
 
 // void getH(float, float, float*);
-void sigmoid(Matrix<float, Dynamic, Dynamic> &m);
-void sigmoidInverse(Matrix<float, Dynamic, Dynamic> &m);
-void grutanh(Matrix<float, Dynamic, Dynamic> &);
+void sigmoid(MatrixXf &m);
+void sigmoidInverse(MatrixXf &m);
+void grutanh(MatrixXf &);
 
 typedef struct gru_weights
 {
     // reset weights and bias
-    Matrix<float, Dynamic, Dynamic> w_r, u_r, b_r;
+    MatrixXf w_r, u_r, b_r;
+    // Matrix<float, 1, Dynamic> b_r;
     // update weights and bias
-    Matrix<float, Dynamic, Dynamic> w_z, u_z, b_z;
+    MatrixXf w_z, u_z, b_z;
+    // Matrix<float, 1, Dynamic> b_z;
     // hidden_hat weights and bias
-    Matrix<float, Dynamic, Dynamic> w_hh, u_hh, b_hh;
+    MatrixXf w_hh, u_hh, b_hh;
+    // Matrix<float, 1, Dynamic> b_hh;
 
 } gru_weights;
 
 int main()
 {
-    Eigen::Matrix2f m(2, 2);
+    Matrix2f m(2, 2);
     m(0, 0) = 1.0;
     m(0, 1) = 2.0;
     m(1, 0) = 3.0;
@@ -36,31 +39,31 @@ int main()
     return 0;
 }
 
-void getH(Matrix2f &in, Matrix2f &prev_hs, gru_weights &g, Matrix2f &hs)
+void getH(MatrixXf &in, MatrixXf &prev_hs, gru_weights &g, MatrixXf &hs)
 {
-    Matrix2f r = (g.w_r * in) + (g.u_r * prev_hs);
+    MatrixXf r = (g.w_r * in) + (g.u_r * prev_hs);
     sigmoid(r);
-    Matrix2f z = (g.w_z * in) + (g.u_z * prev_hs);
+    MatrixXf z = (g.w_z * in) + (g.u_z * prev_hs);
     sigmoid(z);
     sigmoidInverse(z);
-    Matrix2f hhat = (g.w_hh * in) + r.cwiseProduct(g.u_hh * prev_hs);
+    MatrixXf hhat = (g.w_hh * in) + r.cwiseProduct(g.u_hh * prev_hs);
     grutanh(hhat);
     hs = z.cwiseProduct(prev_hs) + z.cwiseProduct(hhat);
 }
 
-void sigmoid(Matrix2f &m)
+void sigmoid(MatrixXf &m)
 {
     for (auto &a : m.reshaped())
         a = 1 / (1 + exp(-a));
 }
 
-void grutanh(Matrix2f &m)
+void grutanh(MatrixXf &m)
 {
     for (auto &a : m.reshaped())
         a = tanh(a);
 }
 
-void sigmoidInverse(Matrix2f &m)
+void sigmoidInverse(MatrixXf &m)
 {
     for (auto &a : m.reshaped())
         a = 1 - a;
@@ -68,28 +71,28 @@ void sigmoidInverse(Matrix2f &m)
 void initialize_gru_weights(gru_weights &g, int h_size, int numClass, int batchSize)
 {
     // Weight matrices for inputs
-    g.w_z = Matrix2f::Random(numClass, h_size);
-    g.w_r = Matrix2f::Random(numClass, h_size);
-    g.w_hh = Matrix2f::Random(numClass, h_size);
+    g.w_z = MatrixXf::Random(numClass, h_size);
+    g.w_r = MatrixXf::Random(numClass, h_size);
+    g.w_hh = MatrixXf::Random(numClass, h_size);
 
     // hidden state
-    Eigen::Matrix2f h_state = Matrix2f::Zero(batchSize, h_size);
+    MatrixXf h_state = MatrixXf::Zero(batchSize, h_size);
 
     // Weight matrices for hidden layer
-    g.u_z = Matrix2f::Random(h_size, h_size);
-    g.u_r = Matrix2f::Random(h_size, h_size);
-    g.u_hh = Matrix2f::Random(h_size, h_size);
+    g.u_z = MatrixXf::Random(h_size, h_size);
+    g.u_r = MatrixXf::Random(h_size, h_size);
+    g.u_hh = MatrixXf::Random(h_size, h_size);
 
     // bias vectors
-    g.b_z = Matrix2f::Random(h_size);
-    g.b_r = Matrix2f::Random(h_size);
-    g.b_hh = Matrix2f::Random(h_size);
+    g.b_z = MatrixXf::Random(1,h_size);
+    g.b_r = MatrixXf::Random(1,h_size);
+    g.b_hh = MatrixXf::Random(1,h_size);
 }
 
 // Forward pass
-void gru(Eigen::Matrix2f &in, int idden_size)
+void gru(Matrix2f &in, int idden_size)
 {
-    Eigen::Matrix2f outputs;
+    Matrix2f outputs;
     for (auto &sequence : in.reshaped())
     {
         // getH(sequence, , )
