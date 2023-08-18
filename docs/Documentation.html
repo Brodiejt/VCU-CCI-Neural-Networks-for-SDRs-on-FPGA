@@ -119,6 +119,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#serial" id="toc-serial" class="nav-link" data-scroll-target="#serial">Serial</a></li>
   <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a></li>
+  <li><a href="#using-hls" id="toc-using-hls" class="nav-link" data-scroll-target="#using-hls">Using HLS</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -248,6 +249,10 @@ Note
 </div>
 </div>
 <p>If ssh fails, make sure that both devices can reach eachother using <code>ping</code>. Also make sure that both the board and the host machine can successfully <code>ping</code> the default gateway.</p>
+</section>
+<section id="using-hls" class="level3">
+<h3 class="anchored" data-anchor-id="using-hls">Using HLS</h3>
+<p>First, follow <a href="https://xilinx.github.io/Embedded-Design-Tutorials/docs/2021.2/build/html/docs/Introduction/ZynqMPSoC-EDT/3-system-configuration.html">this</a> tutorial to make the ZCU102 platform for applications to be built on top of. Next, follow <a href="https://xilinx.github.io/Embedded-Design-Tutorials/docs/2021.2/build/html/docs/Introduction/ZynqMPSoC-EDT/4-build-sw-for-ps-subsystems.html">this</a> tutorial to get a hello world project working. After that, all that needs to be done is change the code and rerun it.</p>
 
 
 </section>

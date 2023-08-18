@@ -120,3 +120,8 @@ Now you can connect to the board by running `ssh -X root@<IPAddress>` on the hos
 :::
 
 If ssh fails, make sure that both devices can reach eachother using `ping`. Also make sure that both the board and the host machine can successfully `ping` the default gateway.
+
+### Using HLS
+
+First, follow [this](https://xilinx.github.io/Embedded-Design-Tutorials/docs/2021.2/build/html/docs/Introduction/ZynqMPSoC-EDT/3-system-configuration.html) tutorial to make the ZCU102 platform for applications to be built on top of.
+Next, follow [this](https://xilinx.github.io/Embedded-Design-Tutorials/docs/2021.2/build/html/docs/Introduction/ZynqMPSoC-EDT/4-build-sw-for-ps-subsystems.html) tutorial to get a hello world project working. After that, all that needs to be done is change the code and rerun it.
